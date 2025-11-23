@@ -1,2 +1,2 @@
 # c_hash
-Pure C hashtable Container
+Pure C hashtable container
