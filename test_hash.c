@@ -29,7 +29,6 @@ int main()
 	if (w) printf("Value:%d\n", *w);
 
 	printf("max bucket size: %d\n", get_max_bucket_size(&hashtable_int));
-	printf("mean bucket size: %d\n", get_mean_bucket_size(&hashtable_int));
 
 	free_hashtable(&hashtable_str);
 	free_hashtable(&hashtable_int);
