@@ -21,4 +21,23 @@ free_hashtable(&hashtable_str);
 
 ## int as key, int as value
 ```C
+HashTable hashtable_int;
+init_hashtable(&hashtable_int, cmp_key_int);
+
+int key_1 = 45;
+int value_1 = 5678;
+int key_2 = 6578;
+int value_2 = 6;
+
+put(&hashtable_int, &key_1, &value_1, sizeof(int), sizeof(int));
+
+int *w = get(&hashtable_int, &key_1, sizeof(int));
+if (w) printf("Value:%d\n", *w);
+
+put(&hashtable_int, &key_2, &value_2, sizeof(int), sizeof(int));
+
+w = get(&hashtable_int, &key_2, sizeof(int));
+if (w) printf("Value:%d\n", *w);
+
+free_hashtable(&hashtable_int);
 ```
