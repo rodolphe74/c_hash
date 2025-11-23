@@ -37,14 +37,12 @@ int main()
 	// check all
 	int count = 0;
 	for (int i = 0; i < codes_postaux_count; i++) {
-		// int k = atoi(codes_postaux[i].insee);
 		char *key = (char *) codes_postaux[i].insee;
 		CodePostal *code_postal = get(&hashtable_cp, key, strlen(key) + 1);
 
 		if (!code_postal) {
 			printf("code insee %s non trouvé\n", key);
 		} else {
-			// display_code_postal(codePostal);
 			count++;
 		}
 	}

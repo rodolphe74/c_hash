@@ -28,11 +28,10 @@ void shallow_copy(Node *target, void *source, size_t size)
 	memcpy(t->data, source, size);
 }
 
-void free_node(void *a)
+void default_free_node(Node *n)
 {
-	Node n = *(Node *)a;
-	free(n.key);
-	free(n.data);
+	free(n->key);
+	free(n->data);
 }
 
 // Hash basé sur les octets, type DJB2 modifié pour 32 bits
@@ -57,6 +56,7 @@ void init_hashtable(HashTable *hastable, int (*cmp_key)(void *, void *))
 	}
 	hastable->key_cmp = cmp_key;
 	hastable->value_copy = shallow_copy;
+	hastable->free_node = default_free_node;
 }
 
 void init_with_index_size_hashtable(HashTable *hastable, int (*cmp_key)(void *, void *), size_t index_size)
@@ -68,18 +68,17 @@ void init_with_index_size_hashtable(HashTable *hastable, int (*cmp_key)(void *, 
 	}
 	hastable->key_cmp = cmp_key;
 	hastable->value_copy = shallow_copy;
+	hastable->free_node = default_free_node;
 }
 
-void init_with_index_size_and_value_copy_hashtable(HashTable *hastable, int (*cmp_key)(void *, void *),
-												   size_t index_size,
-												   void (*value_deep_copy)(Node *target, void *value,
-																		   size_t _value_size))
+void init_with_index_size_and_value_copy_hashtable(
+	HashTable *hastable, int (*cmp_key)(void *, void *), size_t index_size,
+	void (*value_deep_copy)(Node *target, void *value, size_t _value_size), void (*free_node)(Node *n))
 {
 	init_with_index_size_hashtable(hastable, cmp_key, index_size);
 	hastable->value_copy = value_deep_copy;
+	hastable->free_node = free_node;
 }
-
-
 
 void put(HashTable *hashtable, void *key, void *value, size_t key_size, size_t value_size)
 {
@@ -90,16 +89,9 @@ void put(HashTable *hashtable, void *key, void *value, size_t key_size, size_t v
 	// search existing key
 	Node t = {key, NULL};
 
-	// Node t = {NULL, NULL};
-	// t.key = malloc(key_size);
-	// memcpy(t.key, key, key_size);
 	Element *e = search_element(list, &t, hashtable->key_cmp);
-	// free(t.key);
 	if (e) {
 		Node *n = e->data;
-		// free(n->data);
-		// n->data = malloc(value_size);
-		// memcpy(n->data, value, value_size);
 		hashtable->value_copy(n, value, value_size);
 		return;
 	}
@@ -140,7 +132,12 @@ void free_hashtable(HashTable *hashtable)
 {
 	for (int i = 0; i < hashtable->index_size; i++) {
 		List *list = &hashtable->buckets[i];
-		do_on_list(list, free_node);
+		Element *e = list->first;
+		while (e != NULL) {
+			Node *n = (Node *)e->data;
+			hashtable->free_node(n);
+			e = e->next;
+		}
 		free_list(list);
 	}
 	free(hashtable->buckets);
