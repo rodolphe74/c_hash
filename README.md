@@ -5,5 +5,10 @@ Pure C hashtable container
 
 # Minimal use
 ## string as key, string as value
+```C
+```
+
 
 ## int as key, int as value
+```C
+```
