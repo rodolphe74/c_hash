@@ -118,8 +118,8 @@ void free_list(List *list)
 	Element *e = list->first;
 	while (e != NULL) {
 		Element *temp = e->next;
-		free(e->data);
-		free(e);
+		free(e->data);	// free node
+		free(e);		// free element
 		e = temp;
 	}
 }
