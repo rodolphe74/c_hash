@@ -169,6 +169,7 @@ Time (millisec)|
 
 # Hashtable search based on index size
 
-Time (millisec)|
----|
-1794|
+Index size | Time (millisec) |
+--- | --- |
+1 | 2280 |
+2 | 1633 |
