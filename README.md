@@ -159,17 +159,28 @@ if (cp_dyn) display_code_postal_dyn(cp_dyn);
 free_hashtable(&hashtable_cp_dyn);
 ```
 
-## Time comparison
+# Time comparison
 
-# Sequential search
+## 39192 sequential searches
 
 Time (millisec)|
 ---|
 1794|
 
-# Hashtable search based on index size
+## 39192 hashtable searches based on index size
 
 Index size | Time (millisec) |
 --- | --- |
 1 | 2280 |
 2 | 1633 |
+4 | 1120 |
+8 | 724  |
+16 | 406 |
+32 | 396 |
+64 | 201 |
+128 | 101 |
+256 | 51 |
+512 | 26 |
+1024 | 16 |
+2048 | 9 |
+4096 | 5 |

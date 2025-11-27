@@ -51,7 +51,7 @@ int main() {
 
 
     // recherche hashtable
-    #define CP_INDEX_SIZE 2
+    #define CP_INDEX_SIZE 4096
     HashTable hashtable_cp;
 	init_with_index_size_hashtable(&hashtable_cp, cmp_key_str, CP_INDEX_SIZE);
 
