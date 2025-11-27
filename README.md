@@ -163,9 +163,12 @@ free_hashtable(&hashtable_cp_dyn);
 
 # Sequential search
 
-Searches  | Time (millisec)
----|---
-39192 | 1794
+Time (millisec)|
+---|
+1794|
 
 # Hashtable search based on index size
 
+Time (millisec)|
+---|
+1794|
