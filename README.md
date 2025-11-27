@@ -41,3 +41,13 @@ if (w) printf("Value:%d\n", *w);
 
 free_hashtable(&hashtable_int);
 ```
+
+## Time comparison
+
+# Sequential search
+
+Searches  | Time (millisec)
+---|---
+39192 | 1794
+
+# Time comparison based on index size
