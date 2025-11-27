@@ -167,5 +167,5 @@ Searches  | Time (millisec)
 ---|---
 39192 | 1794
 
-# Time comparison based on index size
+# Hashtable search based on index size
 
