@@ -3,6 +3,7 @@
 
 
 #include <string.h>
+#include <stdio.h>
 
 typedef struct {
     const char insee[127];
