@@ -4,9 +4,9 @@
 #include <string.h>
 
 #ifdef _WIN32
-    #include <windows.h>
+#include <windows.h>
 #else
-    #include <time.h>
+#include <time.h>
 #endif
 
 // Fonction qui retourne le temps courant en millisecondes
@@ -51,19 +51,19 @@ int main() {
 
 
     // recherche hashtable
-    #define CP_INDEX_SIZE 4096
+#define CP_INDEX_SIZE 4096
     HashTable hashtable_cp;
-	init_with_index_size_hashtable(&hashtable_cp, cmp_key_str, CP_INDEX_SIZE);
+    init_with_index_size_hashtable(&hashtable_cp, cmp_key_str, CP_INDEX_SIZE);
 
-	for (int i = 0; i < codes_postaux_count; i++) {
-		char *key = (char *) codes_postaux[i].insee;
-		put(&hashtable_cp, key, (CodePostal *) &codes_postaux[i], strlen(key) + 1, sizeof(CodePostal));
-	}
+    for (int i = 0; i < codes_postaux_count; i++) {
+        char *key = (char *) codes_postaux[i].insee;
+        put(&hashtable_cp, key, (CodePostal *) &codes_postaux[i], strlen(key) + 1, sizeof(CodePostal));
+    }
 
     start = current_time_millis();
     count = 0;
-	for (int i = 0; i < codes_postaux_count; i++) {
-		const char *key = (const char *) codes_postaux[i].insee;
+    for (int i = 0; i < codes_postaux_count; i++) {
+        const char *key = (const char *) codes_postaux[i].insee;
         CodePostal *cph = get(&hashtable_cp, (char *) key, strlen(key) + 1);
         if (cph) count++;
     }
@@ -76,4 +76,4 @@ int main() {
 
 
     return 0;
-	}
+}
