@@ -48,7 +48,7 @@ void insert_after_element(List *list, Element *which, Element *element)
 		Element *temp = list->first->next;
 		list->first = element;
 		element->next = temp;
-	} else if (which = list->last) {
+	} else if (which == list->last) {
 		add_element(list, element);
 	} else {
 		Element *temp = which->next;
